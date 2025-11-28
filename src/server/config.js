@@ -3,6 +3,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import {dirname} from "path"
 import { fileURLToPath } from 'url'
+import 'dotenv/config.js'
 
 export default class Server{
     constructor() {
@@ -15,11 +16,8 @@ export default class Server{
     this.app.use(cors())
     this.app.use(express.json())
     this.app.use(morgan('dev'))
-
-    // Archivos estáticos (por si los necesitas en local)
+    // archivo estatico
     const __dirname = dirname(fileURLToPath(import.meta.url))
-    console.log(__dirname)
-    console.log(__dirname +"/public")
     this.app.use(express.static(__dirname + '/../../public'))
   }
 
