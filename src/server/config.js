@@ -3,6 +3,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import {dirname} from "path"
 import { fileURLToPath } from 'url'
+import './dbconfig.js'
 //import 'dotenv/config.js'
 
 export default class Server{
