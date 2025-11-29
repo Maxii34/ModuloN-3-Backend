@@ -70,4 +70,6 @@ const HabitacionSchema = new Schema({
 });
 
 
-export const Habitacion = mongoose.model("Habitacion", HabitacionSchema);
+const Habitacion = mongoose.model("Habitacion", HabitacionSchema);
+
+export default Habitacion;
