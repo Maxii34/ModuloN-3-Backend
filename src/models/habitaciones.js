@@ -2,19 +2,12 @@ import mongoose, { Schema } from "mongoose";
 
 const HabitacionSchema = new Schema({
     numero: { 
-        type: String, 
+        type: Number, 
         required: true, 
         unique: true,
         trim: true,
         minlength: 1,
         maxlength: 10
-    },
-    nombre: { 
-        type: String, 
-        required: true,
-        trim: true,
-        minlength: 3,
-        maxlength: 100
     },
     tipo: { 
         type: String, 
