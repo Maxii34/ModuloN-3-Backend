@@ -27,6 +27,7 @@ export const listarHabitaciones = async (req, res) => {
 
 export const editarHabitacionID = async (req, res) => {
   try {
+    console.log(req.params.id);
     const editarhabitacion = await Habitacion.findByIdAndUpdate(
       req.params.id,
       req.body,

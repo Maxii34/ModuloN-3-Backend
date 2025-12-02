@@ -5,9 +5,8 @@ const HabitacionSchema = new Schema({
         type: Number, 
         required: true, 
         unique: true,
-        trim: true,
-        minlength: 1,
-        maxlength: 10
+        min: 1,
+        max: 1000
     },
     tipo: { 
         type: String, 
