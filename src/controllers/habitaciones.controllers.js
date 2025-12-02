@@ -44,3 +44,19 @@ export const editarHabitacionID = async (req, res) => {
       .json({ mensaje: "Ocurrio un error al editar la habitacion" });
   }
 };
+
+export const obtenerHabitacionID = async (req, res) => {
+try {
+  console.log(req.params.id);
+  const habitacionObtenida = await Habitacion.findById(req.params.id);
+  if (!habitacionObtenida) {
+    return res.status(404).json({ mensaje: "Habitacion no encontrada" });
+  }
+  res.status(200).json(habitacionObtenida);
+} catch (error) {
+  console.error(error);
+  res
+    .status(500)
+    .json({ mensaje: "Ocurrio un error al obtener la habitacion" });
+}
+};
