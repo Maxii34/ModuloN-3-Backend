@@ -5,9 +5,8 @@ const HabitacionSchema = new Schema({
         type: Number, 
         required: true, 
         unique: true,
-        trim: true,
-        minlength: 1,
-        maxlength: 10
+        min: 1,
+        max: 1000
     },
     tipo: { 
         type: String, 
@@ -37,17 +36,17 @@ const HabitacionSchema = new Schema({
         required: true,
         min: 1 
     },
-    caracteristicas: [{
+    caracteristicas: {
         type: String,
         trim: true,
         minlength: 2,
         maxlength: 50
-    }],
-    imagenes: [{
+    },
+    imagenes: {
         type: String,
         trim: true,
         match: /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i,
-    }],
+    },
     piso: { 
         type: Number, 
         min: 0,
