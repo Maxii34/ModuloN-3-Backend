@@ -11,8 +11,8 @@ export const CrearUsuarios = async (req, res) => {
     }
 
     if (tipo === "admin") {
-      const adminEdiste = await usuarios.findOne({ tipo: "admin" });
-      if (adminEdiste) {
+      const adminExiste = await usuarios.findOne({ tipo: "admin" });
+      if (adminExiste) {
         return res.status(400).json({ message: "Ya existe un usuario admin" });
       }
     }
@@ -33,3 +33,20 @@ export const CrearUsuarios = async (req, res) => {
     res.status(500).json({ message: "Error al crear el usuario" });
   }
 };
+
+export const listarUsuarios = async (req, res) => {
+    try {
+        const usuariosList = await usuarios.find();
+        res.status(200).json(usuariosList);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error al listar los usuarios" });
+    }
+};
+
+//const editarUsuarioID = async (req, res) => {};
+
+//const obtenerUsuarioID = async (req, res) => {};
+
+//const eliminarUsuarioID = async (req, res) => {};
+
