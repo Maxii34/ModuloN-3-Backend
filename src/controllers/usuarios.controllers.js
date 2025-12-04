@@ -151,3 +151,17 @@ export const editarUsuarioID = async (req, res) => {
     res.status(500).json({ message: "Error al editar el usuario" });
   }
 };
+
+export const obtenerUsuarioID = async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const usuarioObtenido = await usuarios.findById(req.params.id);
+    if (!usuarioObtenido) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+    res.status(200).json(usuarioObtenido);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error al obtener el usuario" });
+  }
+}
