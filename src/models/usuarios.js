@@ -33,16 +33,7 @@ const usuarioSchema = new Schema(
     password: {
       type: String,
       required: true,
-      unique: true,
-      trim: true,
       minLength: 8,
-      validate: {
-        validator: function (v) {
-          return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#.])[A-Za-z\d@$!%*?&#.]{8,}$/.test(
-            v
-          );
-        },
-      },
     },
     tipo: {
       type: String,
@@ -55,6 +46,7 @@ const usuarioSchema = new Schema(
     timestamps: true,
   }
 );
+
 
 usuarioSchema.methods.toJSON = function () {
   const usuario = this.toObject();

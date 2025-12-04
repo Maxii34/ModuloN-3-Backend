@@ -1,6 +1,6 @@
 import generarjwt from "../middlewares/generarJWT.js";
 import usuarios from "../models/usuarios.js";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 export const CrearUsuarios = async (req, res) => {
   try {
@@ -10,6 +10,15 @@ export const CrearUsuarios = async (req, res) => {
       return res
         .status(400)
         .json({ message: "Tipo, email y password son requeridos" });
+    }
+
+    const expresionPassword =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#.])[A-Za-z\d@$!%*?&#.]{8,}$/;
+    if (!expresionPassword.test(password)) {
+      return res.status(400).json({
+        message:
+          "El password debe tener al menos 8 caracteres, incluir mayúscula, minúscula, número y carácter especial",
+      });
     }
 
     const usuarioExistente = await usuarios.findOne({ email });
@@ -23,12 +32,14 @@ export const CrearUsuarios = async (req, res) => {
         return res.status(400).json({ message: "Ya existe un usuario admin" });
       }
     }
-    const saltos = await bcrypt.genSalt(10);
-    const passwordEncriptada = await bcrypt.hash(password, saltos);
-    req.body.password = passwordEncriptada;
+
+    const saltos = bcrypt.genSaltSync(10);
+    const passwordHasheada = bcrypt.hashSync(password, saltos);
+    req.body.password = passwordHasheada;
 
     const nuevoUsuario = new usuarios(req.body);
     await nuevoUsuario.save();
+
     res.status(201).json({
       message:
         tipo === "admin"
