@@ -92,7 +92,7 @@ export const eliminarUsuarioID = async (req, res) => {
   try {
     console.log(req.params.id);
     const usuarioBuscado = await usuarios.findById(req.params.id);
-    
+
     if (!usuarioBuscado) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
@@ -100,22 +100,43 @@ export const eliminarUsuarioID = async (req, res) => {
     if (usuarioBuscado.tipo === "admin") {
       const adminCount = await usuarios.countDocuments({ tipo: "admin" });
       if (adminCount <= 1) {
-        return res.status(400).json({ 
-          message: "No se puede eliminar el único usuario admin" 
+        return res.status(400).json({
+          message: "No se puede eliminar el único usuario admin",
         });
       }
     }
 
     await usuarios.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Usuario eliminado exitosamente" });
-
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error al eliminar el usuario" });
   }
 };
 
-//const editarUsuarioID = async (req, res) => {};
+export const editarUsuarioID = async (req, res) => {
+  try {
+    const usuarioBuscado = await usuarios.findById(req.params.id);
+    if (!usuarioBuscado) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
 
-//const obtenerUsuarioID = async (req, res) => {};
+    if (req.body.password) {
+      const saltos = await bcrypt.genSalt(10);
+      req.body.password = await bcrypt.hash(req.body.password, saltos);
+    }
 
+    const usuarioActualizado = await usuarios.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json({
+      message: "Usuario actualizado exitosamente",
+      usuarioActualizado,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error al editar el usuario" });
+  }
+};
