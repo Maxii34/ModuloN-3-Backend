@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { crearHabitacion, listarHabitaciones, editarHabitacionID, obtenerHabitacionID} from '../controllers/habitaciones.controllers.js';
+import { crearHabitacion, listarHabitaciones, editarHabitacionID, obtenerHabitacionID, borrarHabitacion} from '../controllers/habitaciones.controllers.js';
 
 const router = Router();
 
 router.route("/").post(crearHabitacion).get(listarHabitaciones)
-router.route("/:id").put(editarHabitacionID).get(obtenerHabitacionID);
+router.route("/:id").put(editarHabitacionID).get(obtenerHabitacionID).delete(borrarHabitacion);
 
 export default router;
