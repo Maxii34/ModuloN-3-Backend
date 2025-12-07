@@ -60,3 +60,19 @@ try {
     .json({ mensaje: "Ocurrio un error al obtener la habitacion" });
 }
 };
+
+export const borrarHabitacion = async (req, res) => {
+try {
+  console.log(req.params.id);
+  const habitacionObtenida = await Habitacion.findByIdAndDelete(req.params.id);
+  if (!habitacionObtenida) {
+    return res.status(404).json({ mensaje: "Habitacion no encontrada" });
+  }
+  res.status(200).json({mensaje:"Habitación eliminada correctamente"})
+} catch (error) {
+  console.error(error);
+  res
+    .status(500)
+    .json({ mensaje: "Ocurrio un error al eliminar la habitacion" });
+}
+};
