@@ -42,7 +42,7 @@ const HabitacionSchema = new Schema({
         minlength: 2,
         maxlength: 50
     },
-    imagenes: {
+    imagen: {
         type: String,
         trim: true,
         match: /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i,
@@ -52,7 +52,7 @@ const HabitacionSchema = new Schema({
         min: 0,
         max: 500
     },
-    metrosCuadrados: { 
+    metros: { 
         type: Number, 
         min: 0,
         max: 600 
