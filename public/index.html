@@ -3,9 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Backend Syntax Hotel</title>
+    <title>Syntax Hotel - Crear Habitación</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Bienvenidos al Backend del Syntax Hotel! 🏨🏨</h1>
+    <div class="container">
+        <header>
+            <h1>🏨 Syntax Hotel</h1>
+            <h2>Crear Nueva Habitación</h2>
+        </header>
+
+        <form id="formHabitacion" class="form-habitacion">
+            <div class="form-group">
+                <label for="numero">Número de Habitación *</label>
+                <input 
+                    type="number" 
+                    id="numero" 
+                    name="numero" 
+                    min="1" 
+                    max="500" 
+                    required
+                    placeholder="Ej: 101"
+                >
+                <span class="error-message" id="error-numero"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo">Tipo de Habitación *</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="">Seleccione un tipo</option>
+                    <option value="individual">Individual</option>
+                    <option value="doble">Doble</option>
+                    <option value="matrimonial">Matrimonial</option>
+                    <option value="suite">Suite</option>
+                    <option value="familiar">Familiar</option>
+                </select>
+                <span class="error-message" id="error-tipo"></span>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="precio">Precio por Noche *</label>
+                    <input 
+                        type="number" 
+                        id="precio" 
+                        name="precio" 
+                        min="1" 
+                        max="200000" 
+                        step="0.01"
+                        required
+                        placeholder="Ej: 15000"
+                    >
+                    <span class="error-message" id="error-precio"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="capacidad">Capacidad (huéspedes) *</label>
+                    <input 
+                        type="number" 
+                        id="capacidad" 
+                        name="capacidad" 
+                        min="1" 
+                        max="10" 
+                        required
+                        placeholder="Ej: 2"
+                    >
+                    <span class="error-message" id="error-capacidad"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="piso">Piso *</label>
+                    <input 
+                        type="number" 
+                        id="piso" 
+                        name="piso" 
+                        min="0" 
+                        max="15" 
+                        required
+                        placeholder="Ej: 1"
+                    >
+                    <span class="error-message" id="error-piso"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="metros">Metros Cuadrados *</label>
+                    <input 
+                        type="number" 
+                        id="metros" 
+                        name="metros" 
+                        min="5" 
+                        max="200" 
+                        required
+                        placeholder="Ej: 25"
+                    >
+                    <span class="error-message" id="error-metros"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado *</label>
+                <select id="estado" name="estado" required>
+                    <option value="">Seleccione un estado</option>
+                    <option value="disponible">Disponible</option>
+                    <option value="ocupada">Ocupada</option>
+                    <option value="reservada">Reservada</option>
+                    <option value="limpieza">Limpieza</option>
+                    <option value="mantenimiento">Mantenimiento</option>
+                </select>
+                <span class="error-message" id="error-estado"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="caracteristicas">Características *</label>
+                <input 
+                    type="text" 
+                    id="caracteristicas" 
+                    name="caracteristicas" 
+                    minlength="2" 
+                    maxlength="80"
+                    required
+                    placeholder="Ej: WiFi, TV, Aire acondicionado"
+                >
+                <span class="error-message" id="error-caracteristicas"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción *</label>
+                <textarea 
+                    id="descripcion" 
+                    name="descripcion" 
+                    rows="4" 
+                    minlength="10" 
+                    maxlength="500"
+                    required
+                    placeholder="Descripción detallada de la habitación (mínimo 10 caracteres)"
+                ></textarea>
+                <span class="error-message" id="error-descripcion"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="imagen">URL de la Imagen *</label>
+                <input 
+                    type="url" 
+                    id="imagen" 
+                    name="imagen" 
+                    required
+                    placeholder="https://ejemplo.com/imagen.jpg"
+                >
+                <span class="error-message" id="error-imagen"></span>
+            </div>
+
+            <div id="mensaje-exito" class="mensaje-exito" style="display: none;"></div>
+            <div id="mensaje-error" class="mensaje-error" style="display: none;"></div>
+
+            <div class="form-actions">
+                <button type="submit" id="btnSubmit" class="btn-submit">
+                    <span id="btnText">Crear Habitación</span>
+                    <span id="btnLoader" class="loader" style="display: none;"></span>
+                </button>
+                <button type="reset" class="btn-reset">Limpiar Formulario</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
