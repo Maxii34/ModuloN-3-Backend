@@ -7,6 +7,7 @@ import {
   editarUsuarioID,
   obtenerUsuarioID,
 } from "../controllers/usuarios.controllers.js";
+import validarToken from "../middlewares/validarToken.js";
 
 const router = Router();
 
@@ -14,8 +15,8 @@ const router = Router();
 router.route("/").post(CrearUsuarios).get(listarUsuarios);
 router.route("/login").post(iniciarSesion);
 router.route("/:id")
-  .delete(eliminarUsuarioID)
-  .put(editarUsuarioID)
-  .get(obtenerUsuarioID);
+  .delete(validarToken, eliminarUsuarioID)
+  .put(validarToken, editarUsuarioID)
+  .get(validarToken, obtenerUsuarioID);
 
 export default router;
