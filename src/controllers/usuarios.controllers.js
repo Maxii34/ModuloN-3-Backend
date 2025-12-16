@@ -81,7 +81,7 @@ export const iniciarSesion = async (req, res) => {
     if (!passwordCorrecto) {
       return res.status(401).json({ message: "Contraseña incorrecta" });
     }
-    const token = generarjwt(usuarioEncontrado._id);
+    const token = generarjwt(usuarioEncontrado._id, usuarioEncontrado.email);
     res.status(200).json({
       mensaje: "Inicio de sesión exitoso",
       token,
