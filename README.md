@@ -23,8 +23,36 @@ Este repositorio contiene el backend del proyecto **Syntax Hotel** (Módulo N3).
 - ![express-validator](https://img.shields.io/badge/express--validator-218380?style=for-the-badge)  — Validación de solicitudes
 - ![morgan](https://img.shields.io/badge/morgan-FFCA28?style=for-the-badge)  — Logger de peticiones HTTP
 
----
+## 🌐 Endpoints
 
+La URL base para todos los endpoints es `/api`.
+
+### Habitaciones (`/habitaciones`)
+
+| Método | Ruta      | Descripción                  | Requiere Token |
+| ------ | --------- | ---------------------------- | -------------- |
+| `GET`    | `/`       | Listar todas las habitaciones| No             |
+| `GET`    | `/:id`    | Obtener una habitación por ID| No             |
+| `POST`   | `/`       | Crear una nueva habitación   | Sí             |
+| `PUT`    | `/:id`    | Editar una habitación por ID | Sí             |
+| `DELETE` | `/:id`    | Borrar una habitación por ID | Sí             |
+
+### Usuarios (`/usuarios`)
+
+| Método | Ruta      | Descripción                   | Requiere Token |
+| ------ | --------- | ----------------------------- | -------------- |
+| `GET`    | `/`       | Listar todos los usuarios     | No             |
+| `GET`    | `/:id`    | Obtener un usuario por ID     | Sí             |
+| `POST`   | `/`       | Crear un nuevo usuario        | No             |
+| `POST`   | `/login`  | Iniciar sesión (obtener token)| No             |
+| `PUT`    | `/:id`    | Editar un usuario por ID      | Sí             |
+| `DELETE` | `/:id`    | Eliminar un usuario por ID    | Sí             |
+
+---
+## Repocitorio Front
+
+[Link aki]()
+---
 ## 📁 Estructura del proyecto
 
 ```
@@ -64,9 +92,7 @@ Este repositorio contiene el backend del proyecto **Syntax Hotel** (Módulo N3).
 2. Crear un archivo `.env` con las variables necesarias (ej.: `PORT`, `MONGO_URI`, `JWT_SECRET`).
 3. Levantar en modo desarrollo: `npm run dev`
 
-> ⚠️ Asegúrate de tener MongoDB en ejecución o una URI válida en `MONGO_URI`.
-
 ---
 
-Si querés, puedo agregar ejemplos de endpoints o un archivo `.env.example` para que sea más fácil poner en marcha el proyecto. ✅
+
 
