@@ -41,6 +41,12 @@ const usuarioSchema = new Schema(
       enum: ["usuario", "admin"],
       default: "usuario",
     },
+    
+    habitacionAsignada: {
+    type: Schema.Types.ObjectId,
+    ref: "Habitacion",
+    default: null,
+  },
   },
   {
     timestamps: true,
