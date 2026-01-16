@@ -56,7 +56,14 @@ const HabitacionSchema = new Schema({
         type: Number, 
         min: 0,
         max: 600 
+    },
+    
+    usuario: {
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario',              
+        default: null                
     }
+
 }, {
     timestamps: true
 });
