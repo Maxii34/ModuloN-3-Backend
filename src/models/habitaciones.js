@@ -21,54 +21,32 @@ const HabitacionSchema = new Schema({
         default: 'disponible',
         lowercase: true 
     },
-    descripcion: { 
-        type: String,
-        minlength: 10,
-        maxlength: 500 
-    },
-    precio: { 
-        type: Number, 
-        required: true,
-        min: 0 
-    },
-    capacidad: { 
-        type: Number, 
-        required: true,
-        min: 1 
-    },
-    caracteristicas: {
-        type: String,
-        trim: true,
-        minlength: 2,
-        maxlength: 50
-    },
-    imagen: {
-        type: String,
-        trim: true,
-        match: /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i,
-    },
-    piso: { 
-        type: Number, 
-        min: 0,
-        max: 500
-    },
-    metros: { 
-        type: Number, 
-        min: 0,
-        max: 600 
-    },
+    precio: { type: Number, required: true, min: 0 },
+    capacidad: { type: Number, required: true, min: 1 },
+    caracteristicas: { type: String, trim: true },
+    imagen: { type: String },
+    piso: { type: Number, min: 0, max: 500 },
+    metros: { type: Number, min: 0, max: 600 },
     
+    // Este es el usuario que se ve en el panel de administrador
     usuario: {
-        type: Schema.Types.ObjectId,
-        ref: 'Usuario',              
+        type: String, // Lo pasamos a String para evitar problemas de compatibilidad              
         default: null                
-    }
+    },
+
+    // --- EL CAMPO CORREGIDO ---
+    fechasOcupadas: [
+        {
+            fechaEntrada: String,
+            fechaSalida: String,
+            // ¡AGREGAMOS EL USUARIO ACÁ ADENTRO!
+            usuario: String 
+        }
+    ]
 
 }, {
     timestamps: true
 });
 
-
 const Habitacion = mongoose.model("Habitacion", HabitacionSchema);
-
 export default Habitacion;
