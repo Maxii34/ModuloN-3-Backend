@@ -7,10 +7,16 @@ const validarToken = (req, res, next) => {
       return res.status(401).json({ mensaje: "No hay token en la petición" });
     }
     const payload = jwt.verify(token, process.env.SECRETA_JWT);
-    req.usuario = payload.Usuario || payload.usuario;
+    
+    // === ESTO ES PARA DEBUGEAR ===
+    console.log("CONTENIDO DEL TOKEN (PAYLOAD):", payload);
+    
+    // Ajustamos para que capture el ID sin importar cómo se llame en el login
+    req.usuario = payload.uid || payload.id || payload.Usuario || payload.usuario || payload._id;
+    
     next();
   } catch (error) {
-    console.log(error);
+    console.log("Error en validarToken:", error);
     res.status(401).json({ mensaje: "Token no válido" });
   }
 };

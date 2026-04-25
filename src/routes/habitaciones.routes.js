@@ -10,17 +10,18 @@ import validacionHabitacion from "../middlewares/validacionHabitaciones.js";
 import validarToken from "../middlewares/validarToken.js";
 import validacionID from "../middlewares/validacionIDHabitaciones.js";
 
-
-
 const router = Router();
+
 router
   .route("/")
-  .post([ validarToken, validacionHabitacion ], crearHabitacion)
+  .post([validarToken, validacionHabitacion], crearHabitacion)
   .get(listarHabitaciones);
+
 router
   .route("/:id")
-  .put([ validarToken, validacionID, validacionHabitacion ], editarHabitacionID)
-  .get(validacionID ,obtenerHabitacionID)
-  .delete([ validarToken, validacionID ], borrarHabitacion);
+  // QUITAMOS 'validacionHabitacion' de aquí para que deje pasar el objeto de la reserva
+  .put([validarToken, validacionID], editarHabitacionID) 
+  .get(validacionID, obtenerHabitacionID)
+  .delete([validarToken, validacionID], borrarHabitacion);
 
 export default router;
